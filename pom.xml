@@ -21,6 +21,7 @@
 		<jboss.fuse.bom.version>6.3.0.redhat-187</jboss.fuse.bom.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.2.16.RELEASE</spring.version>
+		<servicemix.osgi.dynamic.import>*</servicemix.osgi.dynamic.import>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -185,20 +186,7 @@
 						<Bundle-SymbolicName>fhir</Bundle-SymbolicName>
 						<Bundle-Name>Camel Content-Based Router Example using the Java DSL
 							[fhir]</Bundle-Name>
-						<Import-Package>
-							com.csra.fhir,
-							com.intersys,
-							com.qbase.jp.chcs,
-							org.apache.camel,
-							org.apache.camel.builder,
-							org.apache.camel.model.rest,
-							org.springframework.beans.factory.annotation,
-							org.springframework.jdbc.datasource,
-							org.springframework.stereotype,
-							*
-						</Import-Package>
-						<Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
-						<Embed-Transitive>true</Embed-Transitive>
+						<DynamicImport-Package>${servicemix.osgi.dynamic.import}</DynamicImport-Package>
 					</instructions>
 				</configuration>
 			</plugin>
