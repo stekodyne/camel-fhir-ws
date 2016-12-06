@@ -10,7 +10,7 @@ public class CamelRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		restConfiguration().component("restlet").host("localhost").port(8182).bindingMode(RestBindingMode.auto);
+		restConfiguration().component("restlet").host("localhost").port(8181).bindingMode(RestBindingMode.auto);
 
 		rest("/fhir")
 			.get("/patient/{ein}").outType(Patient.class).produces("application/json+fhir").to("bean:patientService?method=getPatient(${header.ein})")

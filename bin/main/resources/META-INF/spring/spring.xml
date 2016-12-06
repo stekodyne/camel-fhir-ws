@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+		<routeBuilder ref="camelRoute" />
+	</camelContext>
+
+	<bean id="camelRoute" class="com.csra.camel.CamelRoute" />
+	<bean id="patientService" class="com.csra.service.PatientService" />
+	<bean id="patientDao" class="com.csra.dao.PatientDao" />
+	<bean id="stubService" class="com.csra.service.StubService" />
+
+	<!-- spring transaction manager -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="chcsDs" />
+	</bean>
+
+	<!-- datasource to the database -->
+	<bean id="chcsDs"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="com.intersys.jdbc.CacheDriver" />
+		<property name="url" value="jdbc:Cache://10.255.242.28:1972/CHCS" />
+		<property name="username" value="_SYSTEM" />
+		<property name="password" value="SYS" />
+	</bean>
+
+	<!-- sql property files -->
+	<context:property-placeholder location="classpath:/sql/patient.properties" />
+	<context:annotation-config></context:annotation-config>
+
+</beans>

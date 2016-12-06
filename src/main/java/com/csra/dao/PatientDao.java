@@ -31,19 +31,13 @@ public class PatientDao {
 
         while (results.next()) {
         	Patient patient = new Patient();
-        	
-        	Id id = new Id();
-        	id.setId(results.getString("ien"));
-        	patient.setId(id);
-        	
-        	Code code = new Code();
-        	code.setValue(results.getString("sex"));
-        	patient.setGender(code);
-        	
+
+        	patient.setId(results.getString("ien"));
+        	patient.setGender(results.getString("sex"));
         	HumanName name = new HumanName();
-        	com.csra.fhir.String fullName = new com.csra.fhir.String();
-        	fullName.setValue(results.getString("name"));
-        	name.setText(fullName);
+        	name.setText(results.getString("name"));
+			name.getFamily().add(results.getString("name").split(",")[0]);
+			name.getGiven().add(results.getString("name").split(",")[1]);
         	patient.getName().add(name);
         	
             patients.add(patient);
@@ -61,20 +55,15 @@ public class PatientDao {
         
         while (results.next()) {
         	patient = new Patient();
-        	
-        	Id id = new Id();
-        	id.setId(results.getString("ien"));
-        	patient.setId(id);
-        	
-        	Code code = new Code();
-        	code.setValue(results.getString("sex"));
-        	patient.setGender(code);
-        	
-        	HumanName name = new HumanName();
-        	com.csra.fhir.String fullName = new com.csra.fhir.String();
-        	fullName.setValue(results.getString("name"));
-        	name.setText(fullName);
-        	patient.getName().add(name);
+
+			patient.setId(results.getString("ien"));
+			patient.setGender(results.getString("sex"));
+			HumanName name = new HumanName();
+			name.setText(results.getString("name"));
+			name.getFamily().add(results.getString("name").split(",")[0]);
+			name.getGiven().add(results.getString("name").split(",")[1]);
+			patient.getName().add(name);
+			break;
         }
         
         return patient;

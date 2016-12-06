@@ -35,7 +35,7 @@
 			<dependency>
 				<groupId>com.csra</groupId>
 				<artifactId>fhir</artifactId>
-				<version>1.0-20161120.194254-1</version>
+				<version>1.0-20161206.010656-2</version>
 				<type>jar</type>
 				<scope>compile</scope>
 			</dependency>
@@ -218,12 +218,12 @@
 	<artifactId>fhir-bundle</artifactId>
 	<distributionManagement>
 		<repository>
-			<id>central</id>
+			<id>artifactory-releases</id>
 			<name>libs-releases</name>
 			<url>http://10.255.242.29:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots</id>
+			<id>artifactory-snapshots</id>
 			<name>libs-snapshots</name>
 			<url>http://10.255.242.29:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
