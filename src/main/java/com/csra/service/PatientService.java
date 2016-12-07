@@ -1,10 +1,8 @@
 package com.csra.service;
 
-import java.util.List;
-
+import com.csra.fhir.Bundle;
 import org.apache.camel.BeanInject;
 import org.springframework.stereotype.Service;
-
 import com.csra.dao.PatientDao;
 import com.csra.fhir.Patient;
 
@@ -13,8 +11,8 @@ public class PatientService {
 	@BeanInject("patientDao")
 	PatientDao patientDao;
 
-	public List<Patient> getPatients() {
-		List<Patient> patients = null;
+	public Bundle getPatients() {
+		Bundle patients = null;
 
 		try {
 			patients = patientDao.getPatients();

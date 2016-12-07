@@ -3,15 +3,16 @@ package com.csra.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+
+import com.csra.fhir.Bundle;
+import com.csra.fhir.BundleEntry;
+import com.csra.fhir.BundleType;
+import com.csra.fhir.BundleTypeList;
+import com.csra.fhir.Patient;
+import com.csra.fhir.ResourceContainer;
 import org.apache.camel.BeanInject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-
-import com.csra.fhir.Code;
-import com.csra.fhir.HumanName;
-import com.csra.fhir.Id;
-import com.csra.fhir.Patient;
 
 public class PatientDao {
 	@BeanInject("chcsDs")
@@ -23,30 +24,39 @@ public class PatientDao {
 	@Value("${patient.select.single}")
 	private String patientSql;
 	
-    public ArrayList<Patient> getPatients() throws Exception {
-        ArrayList<Patient> patients = new ArrayList<Patient>();
+    public Bundle getPatients() throws Exception {
+        Bundle patients = new Bundle();
+		BundleType bundleType = new BundleType();
+		bundleType.setValue(BundleTypeList.COLLECTION);
+		patients.setType(bundleType);
+
         Connection connection = chcsDs.getConnection();
         PreparedStatement statement = connection.prepareStatement(patientsSql);
         ResultSet results = statement.executeQuery();
 
         while (results.next()) {
+			BundleEntry bundleEntry = new BundleEntry();
+			ResourceContainer resourceContainer = new ResourceContainer();
+			bundleEntry.setResource(resourceContainer);
         	Patient patient = new Patient();
 
         	patient.setId(results.getString("ien"));
         	patient.setGender(results.getString("sex"));
-        	HumanName name = new HumanName();
+        	com.csra.fhir.HumanName name = new com.csra.fhir.HumanName();
         	name.setText(results.getString("name"));
 			name.getFamily().add(results.getString("name").split(",")[0]);
 			name.getGiven().add(results.getString("name").split(",")[1]);
         	patient.getName().add(name);
-        	
-            patients.add(patient);
+
+			bundleEntry.getResource().setPatient(patient);
+			patients.getEntry().add(bundleEntry);
         }
+
         return patients;
     }
     
     public Patient getPatient(String ien) throws Exception {
-        Patient patient = null;
+        com.csra.fhir.Patient patient = null;
         Connection connection = chcsDs.getConnection();
         PreparedStatement statement = connection.prepareStatement(patientSql);
         
@@ -54,11 +64,11 @@ public class PatientDao {
         ResultSet results = statement.executeQuery();
         
         while (results.next()) {
-        	patient = new Patient();
+        	patient = new com.csra.fhir.Patient();
 
 			patient.setId(results.getString("ien"));
 			patient.setGender(results.getString("sex"));
-			HumanName name = new HumanName();
+			com.csra.fhir.HumanName name = new com.csra.fhir.HumanName();
 			name.setText(results.getString("name"));
 			name.getFamily().add(results.getString("name").split(",")[0]);
 			name.getGiven().add(results.getString("name").split(",")[1]);
