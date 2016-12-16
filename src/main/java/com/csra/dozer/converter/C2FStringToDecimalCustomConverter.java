@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by steffen on 12/15/16.
  */
-public class StringToDecimalCustomConverter implements CustomConverter {
+public class C2FStringToDecimalCustomConverter implements CustomConverter {
 
     public Object convert(Object destination, Object source, Class destinationClass, Class sourceClass) {
         if (source == null) {
@@ -27,7 +27,7 @@ public class StringToDecimalCustomConverter implements CustomConverter {
         } else if (source instanceof com.csra.fhir.Decimal) {
             return ((Decimal) source).getValue().toString();
         } else {
-            throw new MappingException("Converter StringToDecimalCustomConverter "
+            throw new MappingException("Converter C2FStringToDecimalCustomConverter "
                     + "used incorrectly. Arguments passed in were:"
                     + destination + " and " + source);
         }

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by steffen on 12/15/16.
  */
-public class ChcsFhirDateCustomConverter implements CustomConverter {
+public class C2FDateCustomConverter implements CustomConverter {
 
     public Object convert(Object destination, Object source, Class destinationClass, Class sourceClass) {
         if (source == null) {
@@ -33,7 +33,7 @@ public class ChcsFhirDateCustomConverter implements CustomConverter {
             }
             return ts;
         } else {
-            throw new MappingException("Converter ChcsFhirDateCustomConverter "
+            throw new MappingException("Converter C2FDateCustomConverter "
                     + "used incorrectly. Arguments passed in were:"
                     + destination + " and " + source);
         }

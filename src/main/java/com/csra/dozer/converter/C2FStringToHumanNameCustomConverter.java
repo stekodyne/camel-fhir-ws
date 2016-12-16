@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by steffen on 12/15/16.
  */
-public class HumanNameCustomConverter implements CustomConverter {
+public class C2FStringToHumanNameCustomConverter implements CustomConverter {
 
     public Object convert(Object destination, Object source, Class destinationClass, Class sourceClass) {
         if (source == null) {
@@ -30,7 +30,7 @@ public class HumanNameCustomConverter implements CustomConverter {
             HumanName name = (HumanName) ((List) source).get(0);
             return new String(name.getText());
         } else {
-            throw new MappingException("Converter HumanNameCustomConverter "
+            throw new MappingException("Converter C2FStringToHumanNameCustomConverter "
                     + "used incorrectly. Arguments passed in were:"
                     + destination + " and " + source);
         }

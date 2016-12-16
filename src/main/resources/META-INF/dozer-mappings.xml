@@ -5,15 +5,15 @@
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
     <configuration>
         <custom-converters>
-            <converter type="com.csra.dozer.converter.HumanNameCustomConverter" >
+            <converter type="com.csra.dozer.converter.C2FStringToHumanNameCustomConverter" >
                 <class-a>java.lang.String</class-a>
                 <class-b>[Lcom.csra.fhir.HumanName;</class-b>
             </converter>
-            <converter type="com.csra.dozer.converter.ChcsFhirDateCustomConverter" >
+            <converter type="com.csra.dozer.converter.C2FDateCustomConverter" >
                 <class-a>java.sql.Timestamp</class-a>
                 <class-b>com.csra.fhir.Date</class-b>
             </converter>
-            <converter type="com.csra.dozer.converter.StringToDecimalCustomConverter" >
+            <converter type="com.csra.dozer.converter.C2FStringToDecimalCustomConverter" >
                 <class-a>java.lang.String</class-a>
                 <class-b>com.csra.fhir.Decimal</class-b>
             </converter>
@@ -31,11 +31,11 @@
             <a>sex</a>
             <b>gender</b>
         </field>
-        <field custom-converter="com.csra.dozer.converter.HumanNameCustomConverter">
+        <field custom-converter="com.csra.dozer.converter.C2FStringToHumanNameCustomConverter">
             <a>name</a>
             <b is-accessible="true">name</b>
         </field>
-        <field custom-converter="com.csra.dozer.converter.ChcsFhirDateCustomConverter">
+        <field custom-converter="com.csra.dozer.converter.C2FDateCustomConverter">
             <a>dateOfBirth</a>
             <b>birthDate</b>
         </field>
@@ -56,7 +56,7 @@
             <a>deviceTypes</a>
             <b>comments</b>
         </field>
-        <field custom-converter="com.csra.dozer.converter.ChcsFhirDateCustomConverter">
+        <field custom-converter="com.csra.dozer.converter.C2FDateCustomConverter">
             <a>eventDateTime</a>
             <b>valueDateTime</b>
         </field>
