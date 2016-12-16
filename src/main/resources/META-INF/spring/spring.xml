@@ -15,11 +15,13 @@
 		<routeBuilder ref="camelRoute" />
 	</camelContext>
 
+    <bean id="loggingEventNotifier" class="com.csra.camel.LoggingEventNotifer"/>
+
 	<bean id="camelRoute" class="com.csra.camel.CamelRoute" />
 	<bean id="patientService" class="com.csra.service.PatientService" />
 	<bean id="patientDao" class="com.csra.dao.PatientDao" />
-	<bean id="deviceObservationService" class="com.csra.service.DeviceObservationService" />
-	<bean id="deviceObservationDao" class="com.csra.dao.DeviceObservationDao" />
+	<bean id="observationService" class="com.csra.service.ObservationService" />
+	<bean id="observationDao" class="com.csra.dao.ObservationDao" />
 	<bean id="stubService" class="com.csra.service.StubService" />
 
     <!-- jpa configuration -->

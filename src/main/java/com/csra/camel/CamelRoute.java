@@ -14,8 +14,8 @@ public class CamelRoute extends RouteBuilder {
 
 		rest("/fhir")
 			.post("/echo").to("stream:out")
-            .get("/deviceobservation/{id}").outType(Bundle.class).produces("application/json+fhir").to("bean:deviceObservationService?method=getDeviceObservations(${header.id})")
-            .post("/deviceobservation/{id}").outType(Bundle.class).produces("application/json+fhir").to("bean:deviceObservationService?method=postDeviceObservation(${header.id}, ${in.body})")
+            .get("/observation/{id}").outType(Bundle.class).produces("application/json+fhir").to("bean:observationService?method=getObservations(${header.id})")
+            .post("/observation/{id}").outType(Bundle.class).produces("application/json+fhir").to("bean:observationService?method=postObservation(${header.id}, ${in.body})")
             .get("/patient/{id}").outType(Patient.class).produces("application/json+fhir").to("bean:patientService?method=getPatient(${header.id})")
 			.get("/patients").outType(Bundle.class).produces("application/json+fhir").to("bean:patientService?method=getPatients()")
             .get("/{object}").outType(Object.class).produces("application/json+fhir").to("bean:stubService?method=getObject(${header.object})");

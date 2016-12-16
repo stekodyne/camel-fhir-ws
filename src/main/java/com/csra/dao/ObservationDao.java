@@ -1,10 +1,6 @@
 package com.csra.dao;
 
-import com.csra.dozer.bundler.FhirBundler;
-import com.csra.fhir.Bundle;
-import com.csra.fhir.DeviceMetric;
-import com.csra.model.chcs.DeviceObservation;
-import com.csra.model.chcs.Patient;
+import com.csra.model.chcs.Observation;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class DeviceObservationDao {
+public class ObservationDao {
 
     private EntityManager entityManager;
 
@@ -23,7 +19,7 @@ public class DeviceObservationDao {
     }
 
     @Transactional
-    public boolean postDeviceObservation(String id, String body) throws Exception {
+    public boolean postObservation(String id, String body) throws Exception {
         List<com.csra.model.chcs.Patient> patients = null;
         patients = entityManager.createQuery("from Patient p").getResultList();
 
@@ -31,9 +27,9 @@ public class DeviceObservationDao {
     }
 
     @Transactional
-    public List<DeviceObservation> getDeviceObservations(String id) throws Exception {
-        List<com.csra.model.chcs.DeviceObservation> observations = null;
-        observations = entityManager.createQuery("from DeviceObservation d where d.patientId = :id").setParameter("id", id).getResultList();
+    public List<Observation> getObservations(String id) throws Exception {
+        List<Observation> observations = null;
+        observations = entityManager.createQuery("from Observation d where d.patientId = :id").setParameter("id", id).getResultList();
 
         return observations;
     }

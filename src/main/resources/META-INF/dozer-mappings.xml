@@ -42,7 +42,7 @@
     </mapping>
 
     <mapping>
-        <class-a>com.csra.model.chcs.DeviceObservation</class-a>
+        <class-a>com.csra.model.chcs.Observation</class-a>
         <class-b>com.csra.fhir.Observation</class-b>
         <field>
             <a>units</a>
