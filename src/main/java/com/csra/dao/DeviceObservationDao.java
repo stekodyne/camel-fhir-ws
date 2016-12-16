@@ -33,7 +33,7 @@ public class DeviceObservationDao {
     @Transactional
     public List<DeviceObservation> getDeviceObservations(String id) throws Exception {
         List<com.csra.model.chcs.DeviceObservation> observations = null;
-        observations = entityManager.createQuery("from DeviceObservation d where d.ien = :id").setParameter("id", id).getResultList();
+        observations = entityManager.createQuery("from DeviceObservation d where d.patientId = :id").setParameter("id", id).getResultList();
 
         return observations;
     }

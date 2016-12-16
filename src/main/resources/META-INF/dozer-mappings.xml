@@ -13,6 +13,10 @@
                 <class-a>java.sql.Timestamp</class-a>
                 <class-b>com.csra.fhir.Date</class-b>
             </converter>
+            <converter type="com.csra.dozer.converter.StringToDecimalCustomConverter" >
+                <class-a>java.lang.String</class-a>
+                <class-b>com.csra.fhir.Decimal</class-b>
+            </converter>
         </custom-converters>
     </configuration>
 
@@ -34,6 +38,27 @@
         <field custom-converter="com.csra.dozer.converter.ChcsFhirDateCustomConverter">
             <a>dateOfBirth</a>
             <b>birthDate</b>
+        </field>
+    </mapping>
+
+    <mapping>
+        <class-a>com.csra.model.chcs.DeviceObservation</class-a>
+        <class-b>com.csra.fhir.Observation</class-b>
+        <field>
+            <a>units</a>
+            <b>valueQuantity.unit</b>
+        </field>
+        <field>
+            <a>results</a>
+            <b>valueQuantity.code</b>
+        </field>
+        <field>
+            <a>deviceTypes</a>
+            <b>comments</b>
+        </field>
+        <field custom-converter="com.csra.dozer.converter.ChcsFhirDateCustomConverter">
+            <a>eventDateTime</a>
+            <b>valueDateTime</b>
         </field>
     </mapping>
 

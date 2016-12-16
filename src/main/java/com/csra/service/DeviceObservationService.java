@@ -3,8 +3,6 @@ package com.csra.service;
 import com.csra.dao.DeviceObservationDao;
 import com.csra.dozer.bundler.FhirBundler;
 import com.csra.fhir.Bundle;
-import com.csra.fhir.DeviceMetric;
-import com.csra.fhir.Patient;
 import org.apache.camel.BeanInject;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;

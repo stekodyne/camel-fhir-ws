@@ -39,7 +39,7 @@ public class FhirBundler {
             BundleEntry bundleEntry = new BundleEntry();
             ResourceContainer resourceContainer = new ResourceContainer();
             bundleEntry.setResource(resourceContainer);
-            bundleEntry.getResource().setPatient(mapper.map(resource, com.csra.fhir.Patient.class));
+            bundleEntry.getResource().setObservation(mapper.map(resource, com.csra.fhir.Observation.class));
             bundle.getEntry().add(bundleEntry);
         }
 
