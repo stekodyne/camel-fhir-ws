@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <custom-converters>
+            <converter type="com.csra.dozer.converter.HumanNameCustomConverter" >
+                <class-a>java.lang.String</class-a>
+                <class-b>[Lcom.csra.fhir.HumanName;</class-b>
+            </converter>
+            <converter type="com.csra.dozer.converter.ChcsFhirDateCustomConverter" >
+                <class-a>java.sql.Timestamp</class-a>
+                <class-b>com.csra.fhir.Date</class-b>
+            </converter>
+        </custom-converters>
+    </configuration>
+
+    <mapping>
+        <class-a>com.csra.model.chcs.Patient</class-a>
+        <class-b>com.csra.fhir.Patient</class-b>
+        <field>
+            <a>ien</a>
+            <b>id</b>
+        </field>
+        <field>
+            <a>sex</a>
+            <b>gender</b>
+        </field>
+        <field custom-converter="com.csra.dozer.converter.HumanNameCustomConverter">
+            <a>name</a>
+            <b is-accessible="true">name</b>
+        </field>
+        <field custom-converter="com.csra.dozer.converter.ChcsFhirDateCustomConverter">
+            <a>dateOfBirth</a>
+            <b>birthDate</b>
+        </field>
+    </mapping>
+
+</mappings>

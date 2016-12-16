@@ -1,7 +1,9 @@
 package com.csra.service;
 
+import com.csra.dozer.bundler.FhirBundler;
 import com.csra.fhir.Bundle;
 import org.apache.camel.BeanInject;
+import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 import com.csra.dao.PatientDao;
 import com.csra.fhir.Patient;
@@ -11,23 +13,26 @@ public class PatientService {
 	@BeanInject("patientDao")
 	PatientDao patientDao;
 
+	@BeanInject("mapper")
+	Mapper mapper;
+
 	public Bundle getPatients() {
-		Bundle patients = null;
+        Bundle bundle = new Bundle();
 
 		try {
-			patients = patientDao.getPatients();
+            bundle = FhirBundler.createPatientBundle(mapper, patientDao.getPatients());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return patients;
+		return bundle;
 	}
 
-	public Patient getPatient(String ien) {
+	public Patient getPatient(String id) {
 		Patient patient = null;
 
 		try {
-			patient = patientDao.getPatient(ien);
+			patient = mapper.map(patientDao.getPatient(id), com.csra.fhir.Patient.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package com.csra.factories;
+package com.csra.factory;
 
 import com.csra.fhir.ObjectFactory;
 
